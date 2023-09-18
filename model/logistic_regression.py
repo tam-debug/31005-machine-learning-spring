@@ -1,17 +1,6 @@
 """
 Logistic regression model
 Classifies 2 classes
-
-Components
-- score computation
-- classification probability
-- loss function
-- parameter updating rule
-
-References
-- https://developer.ibm.com/articles/implementing-logistic-regression-from-scratch-in-python/
-- https://timvieira.github.io/blog/post/2014/02/11/exp-normalize-trick/
-
 """
 import logging
 
@@ -201,9 +190,9 @@ class LogisticRegressionCustomModel:
     def compute_gradient_magnitude(self, gradients_w: np.ndarray, gradient_b: float) -> float:
         """
 
-        :param gradients_w:
-        :param gradient_b:
-        :return:
+        :param gradients_w: The gradients of the weights
+        :param gradient_b: The gradient of the bias
+        :return: The magnitude of the gradient vector
         """
         partial_derivatives = np.append(gradients_w, gradient_b)
 
@@ -223,7 +212,5 @@ class LogisticRegressionCustomModel:
         :param gradient_b: The gradient for the bias
         :return: N/A
         """
-        # self.weights = self.weights - gradient_w
-        # self.bias = self.bias - gradient_b
         self.weights = self.weights - learning_rate * gradient_w
         self.bias = self.bias - learning_rate * gradient_b
