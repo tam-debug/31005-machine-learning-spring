@@ -45,7 +45,7 @@ class LogisticRegressionCustomModel:
         x_train: np.ndarray,
         y_train: np.ndarray,
         max_iterations: int = 1000,
-        learning_rate: float = 0.1,
+        learning_rate: float = 0.001,
         tolerance: float = 1e-6,
     ) -> None:
         """
@@ -75,7 +75,7 @@ class LogisticRegressionCustomModel:
         )
 
         for i in range(max_iterations):
-            x_dot_weights = np.matmul(self.weights, x_train.transpose())
+            x_dot_weights = np.matmul(self.weights, x_train.transpose()) + self.bias
 
             pred = self._apply_logistic_function(x_dot_weights)
 
@@ -144,11 +144,11 @@ class LogisticRegressionCustomModel:
         :return The corresponding sigmoid function value
         """
         if x >= 0:
-            z = np.exp(-x)
-            return 1 / (1 + z)
+            helper = np.exp(-x)
+            return 1 / (1 + helper)
         else:
-            z = np.exp(x)
-            return z / (1 + z)
+            helper = np.exp(x)
+            return helper / (1 + helper)
 
     def _compute_loss(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
         """
